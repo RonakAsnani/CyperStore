@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
-import { getUserDetails } from "../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import Loader from "../components/Loader";
+import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
 const ProfileScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ const ProfileScreen = ({ location, history }) => {
   const [message, setMessage] = useState(null);
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
+  const [updatedMessage, setUpdatedMessage] = useState(false);
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -22,13 +24,17 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user) {
+      if (!user || !user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
       } else {
         setName(user.name);
@@ -36,13 +42,23 @@ const ProfileScreen = ({ location, history }) => {
         setPhone(user.phone);
       }
     }
-  }, [userInfo, history, dispatch, user]);
+  }, [userInfo, history, dispatch, user, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          name,
+          email,
+          phone: user.phone,
+          password,
+        })
+      );
+      setUpdatedMessage(true);
     }
   };
   return (
@@ -51,6 +67,7 @@ const ProfileScreen = ({ location, history }) => {
         <h2>User Profile</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
+        {updatedMessage && <Message variant="success">Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
