@@ -20,6 +20,7 @@ const LoginScreen = ({ location, history }) => {
     if (userInfo) {
       history.push(redirect);
     }
+    // eslint-disable-next-line
   }, [userInfo]);
 
   const dispatch = useDispatch();
