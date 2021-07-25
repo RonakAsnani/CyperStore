@@ -3,7 +3,7 @@ import { Form, Button, Row, Col, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
-import { listMyOrders, orderListMyOrders } from "../actions/orderActions";
+import { listMyOrders } from "../actions/orderActions";
 import Loader from "../components/Loader";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 import { LinkContainer } from "react-router-bootstrap";
