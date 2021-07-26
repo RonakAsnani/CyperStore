@@ -22,4 +22,68 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getProductById, getProducts };
+// @description    delete product
+// @route DELETE /products/:id
+// @access private/admin
+const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    await product.remove();
+    res.json({ message: "Product Removed" });
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
+// @description    create product
+// @route POST /products
+// @access private/admin
+const createProduct = asyncHandler(async (req, res) => {
+  const product = new Product({
+    name: "Sample name",
+    price: 0,
+    user: req.user._id,
+    image: "/image/sample.jpg",
+    brand: "Sample brand",
+    category: "Sample category",
+    CountInStock: 5,
+    numReviews: 0,
+    description: "Sample Description",
+  });
+
+  const createdProduct = await product.save();
+  res.status(201).json(createdProduct);
+});
+
+// @description    update product
+// @route PUT /products/:id
+// @access private/admin
+const updateProduct = asyncHandler(async (req, res) => {
+  const { name, price, description, image, brand, category, CountInStock } =
+    req.body;
+
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    product.name = name;
+    product.price = price;
+    product.description = description;
+    product.image = image;
+    product.brand = brand;
+    product.category = category;
+    product.CountInStock = CountInStock;
+    const updatedProduct = await product.save();
+    res.json(updatedProduct);
+  } else {
+    res.status(404);
+    throw new Error("Product Not Found");
+  }
+});
+
+module.exports = {
+  getProductById,
+  getProducts,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+};
