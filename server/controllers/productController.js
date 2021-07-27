@@ -5,6 +5,8 @@ const asyncHandler = require("express-async-handler");
 // @route GET /products
 // @access PUBLIC
 const getProducts = asyncHandler(async (req, res) => {
+  const pageSize = 5;
+  const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
         $or: [
@@ -29,9 +31,11 @@ const getProducts = asyncHandler(async (req, res) => {
         ],
       }
     : {};
-
-  const products = await Product.find({ ...keyword });
-  res.json(products);
+  const count = await Product.countDocuments({ ...keyword });
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @description    fetch single products
@@ -142,6 +146,15 @@ const createProductReview = asyncHandler(async (req, res) => {
   }
 });
 
+// @description  get top rated products
+// @route PUT /products/:id/top
+// @access Public
+const getTopProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+
+  res.json(products);
+});
+
 module.exports = {
   getProductById,
   getProducts,
@@ -149,4 +162,5 @@ module.exports = {
   createProduct,
   updateProduct,
   createProductReview,
+  getTopProducts,
 };
