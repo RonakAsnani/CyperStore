@@ -37,7 +37,11 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/orders`, order, config);
+    const { data } = await axios.post(
+      `https://storespot.herokuapp.com/orders`,
+      order,
+      config
+    );
     dispatch({
       type: ORDER_CREATE_SUCCESS,
       payload: data,
@@ -71,7 +75,10 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/orders/${id}`, config);
+    const { data } = await axios.get(
+      `https://storespot.herokuapp.com/orders/${id}`,
+      config
+    );
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
       payload: data,
@@ -108,7 +115,7 @@ export const payOrder =
       };
 
       const { data } = await axios.put(
-        `/orders/${orderId}/pay`,
+        `https://storespot.herokuapp.com/orders/${orderId}/pay`,
         paymentResult,
         config
       );
@@ -145,7 +152,10 @@ export const listMyOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/orders/myorders`, config);
+    const { data } = await axios.get(
+      `https://storespot.herokuapp.com/orders/myorders`,
+      config
+    );
     dispatch({
       type: ORDER_LIST_MY_SUCCESS,
       payload: data,
@@ -179,7 +189,10 @@ export const listOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/orders`, config);
+    const { data } = await axios.get(
+      `https://storespot.herokuapp.com/orders`,
+      config
+    );
     dispatch({
       type: ORDER_LIST_SUCCESS,
       payload: data,
@@ -214,7 +227,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/orders/${order._id}/deliver`,
+      `https://storespot.herokuapp.com/orders/${order._id}/deliver`,
       {},
       config
     );

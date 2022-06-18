@@ -41,7 +41,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/users/login",
+      "https://storespot.herokuapp.com/users/login",
       { email, password },
       config
     );
@@ -84,7 +84,7 @@ export const register = (name, email, phone, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/users",
+      "https://storespot.herokuapp.com/users",
       { name, email, phone, password },
       config
     );
@@ -126,7 +126,10 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/users/${id}`, config);
+    const { data } = await axios.get(
+      `https://storespot.herokuapp.com/users/${id}`,
+      config
+    );
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,
@@ -163,7 +166,11 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`/users/profile`, user, config);
+    const { data } = await axios.put(
+      `https://storespot.herokuapp.com/users/profile`,
+      user,
+      config
+    );
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
@@ -204,7 +211,10 @@ export const listUsers = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/users`, config);
+    const { data } = await axios.get(
+      `https://storespot.herokuapp.com/users`,
+      config
+    );
     dispatch({
       type: USER_LIST_SUCCESS,
       payload: data,
@@ -240,7 +250,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`/users/${id}`, config);
+    await axios.delete(`https://storespot.herokuapp.com/users/${id}`, config);
     dispatch({
       type: USER_DELETE_SUCCESS,
     });
@@ -276,7 +286,11 @@ export const updateUser = (user) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(`/users/${user._id}`, user, config);
+    const { data } = await axios.put(
+      `https://storespot.herokuapp.com/users/${user._id}`,
+      user,
+      config
+    );
     dispatch({
       type: USER_UPDATE_SUCCESS,
     });

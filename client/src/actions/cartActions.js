@@ -7,7 +7,9 @@ import {
 } from "../constants/cartConstants";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/products/${id}`);
+  const { data } = await axios.get(
+    `https://storespot.herokuapp.com/products/${id}`
+  );
 
   dispatch({
     type: CART_ADD_ITEM,
