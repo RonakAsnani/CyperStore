@@ -12,7 +12,7 @@ const Meta = ({ title, description, keyword }) => {
 };
 
 Meta.defaultProps = {
-  title: "Welcome to StoreSpot",
+  title: "Welcome to CyperStore",
   keyword: "electronics",
   description: "We sell the best products",
 };

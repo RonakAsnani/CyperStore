@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 // @route GET /products
 // @access PUBLIC
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 5;
+  const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {

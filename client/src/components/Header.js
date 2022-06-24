@@ -16,13 +16,16 @@ const Header = () => {
   };
   return (
     <header>
-      <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
+      <Navbar bg="primary" variant="dark" collapseOnSelect expand="lg">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>StoreSpot</Navbar.Brand>
+            <Navbar.Brand>CyperStore</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            // style={{ marginLeft: "25%", width: "100%" }}
+          >
             <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
