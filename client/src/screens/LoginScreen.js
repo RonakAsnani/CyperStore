@@ -66,6 +66,12 @@ const LoginScreen = ({ location, history }) => {
           </Link>
         </Col>
       </Row>
+      <Row className="py-3">
+        <Col>For User Email: user@gmail.com, Password: 12345</Col>
+      </Row>
+      <Row className="py-3">
+        <Col>For Admin Email: a@aa.com, Password: 12345678</Col>
+      </Row>
     </FormContainer>
   );
 };
