@@ -41,7 +41,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "https://storespot.herokuapp.com/users/login",
+      "https://cyperstore.onrender.com/users/login",
       { email, password },
       config
     );
@@ -84,7 +84,7 @@ export const register = (name, email, phone, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "https://storespot.herokuapp.com/users",
+      "https://cyperstore.onrender.com/users",
       { name, email, phone, password },
       config
     );
@@ -127,7 +127,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `https://storespot.herokuapp.com/users/${id}`,
+      `https://cyperstore.onrender.com/users/${id}`,
       config
     );
     dispatch({
@@ -167,7 +167,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://storespot.herokuapp.com/users/profile`,
+      `https://cyperstore.onrender.com/users/profile`,
       user,
       config
     );
@@ -212,7 +212,7 @@ export const listUsers = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `https://storespot.herokuapp.com/users`,
+      `https://cyperstore.onrender.com/users`,
       config
     );
     dispatch({
@@ -250,7 +250,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(`https://storespot.herokuapp.com/users/${id}`, config);
+    await axios.delete(`https://cyperstore.onrender.com/users/${id}`, config);
     dispatch({
       type: USER_DELETE_SUCCESS,
     });
@@ -287,7 +287,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://storespot.herokuapp.com/users/${user._id}`,
+      `https://cyperstore.onrender.com/users/${user._id}`,
       user,
       config
     );

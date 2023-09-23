@@ -38,7 +38,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `https://storespot.herokuapp.com/orders`,
+      `https://cyperstore.onrender.com/orders`,
       order,
       config
     );
@@ -76,7 +76,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `https://storespot.herokuapp.com/orders/${id}`,
+      `https://cyperstore.onrender.com/orders/${id}`,
       config
     );
     dispatch({
@@ -115,7 +115,7 @@ export const payOrder =
       };
 
       const { data } = await axios.put(
-        `https://storespot.herokuapp.com/orders/${orderId}/pay`,
+        `https://cyperstore.onrender.com/orders/${orderId}/pay`,
         paymentResult,
         config
       );
@@ -153,7 +153,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `https://storespot.herokuapp.com/orders/myorders`,
+      `https://cyperstore.onrender.com/orders/myorders`,
       config
     );
     dispatch({
@@ -190,7 +190,7 @@ export const listOrders = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `https://storespot.herokuapp.com/orders`,
+      `https://cyperstore.onrender.com/orders`,
       config
     );
     dispatch({
@@ -227,7 +227,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://storespot.herokuapp.com/orders/${order._id}/deliver`,
+      `https://cyperstore.onrender.com/orders/${order._id}/deliver`,
       {},
       config
     );

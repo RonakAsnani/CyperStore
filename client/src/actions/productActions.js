@@ -31,7 +31,7 @@ export const listProducts =
       dispatch({ type: PRODUCT_LIST_REQUEST });
 
       const { data } = await axios.get(
-        `https://storespot.herokuapp.com/products?keyword=${keyword}&pageNumber=${pageNumber}`
+        `https://cyperstore.onrender.com/products?keyword=${keyword}&pageNumber=${pageNumber}`
       );
 
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
@@ -51,7 +51,7 @@ export const listProductDetails = (id) => async (dispatch) => {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
     const { data } = await axios.get(
-      `https://storespot.herokuapp.com/products/${id} `
+      `https://cyperstore.onrender.com/products/${id} `
     );
 
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
@@ -84,7 +84,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      `https://storespot.herokuapp.com/products/${id}`,
+      `https://cyperstore.onrender.com/products/${id}`,
       config
     );
     dispatch({
@@ -120,7 +120,7 @@ export const createProduct = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `https://storespot.herokuapp.com/products`,
+      `https://cyperstore.onrender.com/products`,
       {},
       config
     );
@@ -159,7 +159,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://storespot.herokuapp.com/products/${product._id}`,
+      `https://cyperstore.onrender.com/products/${product._id}`,
       product,
       config
     );
@@ -200,7 +200,7 @@ export const createProductReview =
       };
 
       await axios.post(
-        `https://storespot.herokuapp.com/products/${productId}/reviews`,
+        `https://cyperstore.onrender.com/products/${productId}/reviews`,
         review,
         config
       );
@@ -225,7 +225,7 @@ export const listTopProducts = () => async (dispatch) => {
     dispatch({ type: PRODUCT_TOP_REQUEST });
 
     const { data } = await axios.get(
-      `https://storespot.herokuapp.com/products/top`
+      `https://cyperstore.onrender.com/products/top`
     );
 
     dispatch({ type: PRODUCT_TOP_SUCCESS, payload: data });
